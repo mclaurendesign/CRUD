@@ -1,0 +1,98 @@
+﻿@using System.Dynamic;
+
+@{
+      Page.Title ="Edit";
+       var id=int.Parse(UrlData[0]);
+       var project = dataAccess.GetProjectById(id);
+
+
+       // Response.Redirect("~/Index.cshtml");
+}
+
+
+@section CSS {
+    <!--OPTIONAL SECTION, PAGE SPECIFIC CSS-->
+}
+@section SectionName {
+    <section class="">
+
+        <!--OPTIONAL SECTION-->
+    </section>
+}
+<h2>@Page.Title</h2>
+
+<div>
+    <!--PAGE CONTENT-->
+    @{ 
+     if (IsPost)
+        {
+       /*         dynamic project = new ExpandoObject();
+    project.projectName = Request["projectName"];
+    project.client = Request["client"];
+    project.description = Request["description"];
+    project.projectType = Request["projectType"];
+    project.tools = Request["tools"];
+    project.publicView = Request["publicView"];
+    project.projectId = int.Parse(Request["projectID"]);
+    
+    dataAccess.UpdateProject(project);
+    */
+        }
+        else {
+            <fieldset>
+            <legend>Input</legend>
+            
+            <form method="post"
+                  action="../ProcessUpdate.cshtml/@id">
+                
+        <input type="hidden" name="projectID" value="@id" />
+                <label for="projectName"
+                       class="span2">Project Name: </label>
+                <input type="text"
+                       class="span4"
+                       name="projectName"
+                       value="@project.projectName" />
+                <br />
+                <label for="client"
+                       class="span2">Client: </label>
+                <input type="text"
+                       name="client"
+                       value="@project.client" />
+                <br />
+                <label for="description"
+                       class="span2">Description: </label>
+                <textarea cols="40"
+                          rows="4"
+                          name="description" 
+                          value="@project.description">@project.description</textarea>
+                <br />
+                <label for="projectType"
+                       class="span2">Project Type: </label>
+                <input type="text"
+                       name="projectType"
+                       value="@project.projectType" />
+                <br />
+                <label for="tools"
+                       class="span2">Tools: </label>
+                <input type="text"
+                       name="tools"
+                       value="@project.tools" />
+                <br />
+                <label for="publicView"
+                       class="span2">Public: </label>
+                <input type="checkbox"
+                       checked="@project.publicView" />
+                <br /> <br />
+                <input type="submit"
+                       value="Submit">
+            </form>
+            </fieldset>
+        }
+    }
+
+</div>
+@section Scripts {
+    <section class="">
+        <!--OPTIONAL SECTION, PAGE SPECIFIC JAVASCRIPT-->
+    </section>
+}

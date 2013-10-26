@@ -1,0 +1,102 @@
+﻿@using System.Dynamic;
+
+@{
+    Page.Title="Add";
+    // VALIDATE INPUT
+
+     dynamic project = new ExpandoObject();
+    project.projectName = Request["projectName"];
+    project.client = Request["client"];
+    project.description = Request["description"];
+    project.projectType = Request["projectType"];
+    project.tools = Request["tools"];
+    project.publicView = Request["publicView"];
+
+    // ADD VALIDATED DATA TO DATABASE
+
+
+    //var project = dataAccess.GetProjectById(id);
+
+    // REDIRECT TO DETAILED VIEW
+
+
+}
+
+@section CSS {
+    <!--OPTIONAL SECTION, PAGE SPECIFIC CSS-->
+}
+@section SectionName {
+    <section class="">
+        <!--OPTIONAL SECTION-->
+    </section>
+}
+<h2>@Page.Title</h2>
+
+<div>
+    <!--PAGE CONTENT-->
+    @{ 
+        if (IsPost) {
+            <text>
+            <h3>Validate Entry</h3>
+        Project: @project.projectName <br />
+        Client: @project.client <br />
+        Description: @project.description <br />
+        Project Type: @project.projectType <br />
+        Tools: @project.tools <br />
+        Public: @project.publicView <br />
+            </text>
+                    
+    dataAccess.AddProject(project);
+
+            //var project = dataAccess.GetProjectById(id);
+                }
+                else {
+            <form method="post"
+                  action="">
+                <label for="projectName"
+                       class="span2">Project Name: </label>
+                <input type="text"
+                       name="projectName"
+                       placeholder="Project Name" />
+                <br />
+                <label for="client"
+                       class="span2">Client: </label>
+                <input type="text"
+                       name="client"
+                       placeholder="Client" />
+                <br />
+                <label for="description"
+                       class="span2">Description: </label>
+                <textarea cols="40"
+                          rows="4"
+                          name="description"
+                          placeholder="Decription..."></textarea>
+                <br />
+                <label for="projectType"
+                       class="span2">Project Type: </label>
+                <input type="text"
+                       name="projectType"
+                       placeholder="Project Type" />
+                <br />
+                <label for="tools"
+                       class="span2">Tools: </label>
+                <input type="text"
+                       name="tools"
+                       placeholder="Tools used.." />
+                <br />
+                <label for="publicView"
+                       class="span2">Public: </label>
+                <input type="checkbox"
+                       name="publicView" />
+                <br /> <br />
+                <input type="submit"
+                       value="Submit">
+            </form>
+        }
+    }
+</div>
+@section Scripts {
+    <section class="">
+        <!--OPTIONAL SECTION, PAGE SPECIFIC JAVASCRIPT-->
+    </section>
+}

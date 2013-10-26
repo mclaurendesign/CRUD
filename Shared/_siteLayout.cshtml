@@ -1,0 +1,85 @@
+﻿@{
+   var theYear = DateTime.Now.Year;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>@Page.Title</title>
+
+
+        <link type="text/css"
+              rel="stylesheet"
+              href="../css/bootstrap.css">
+
+        <link type="text/css"
+              rel="stylesheet"
+              href="../css/stickyfooter.css">
+
+
+        <link rel="shortcut icon"
+              href="favicon.ico">
+        @RenderSection("CSS", required: false)
+
+    </head>
+    <body class="top">
+        <div id="container">
+            <div id="wrap">
+                <div id="body">
+                    <div class="container">
+                        <div id="top">
+                            <ul class="nav nav-tabs ">
+                                <li>
+                                    <a href="../index.cshtml">Index
+                                        <span class="divider"></span></a></li>
+                                <li>
+                                    <a href="../Add.cshtml">Add
+                                        <span class="divider"></span></a></li>
+                                <li>
+                                    <a href="../Detail.cshtml">Detail
+                                        <span class="divider"></span></a></li>
+                                <li>
+                                    <a href="../Edit.cshtml">Edit
+                                        <span class="divider"></span></a></li>
+                                <li>
+                                    <a href="../Delete.cshtml">Delete
+                                        <span class="divider"></span></a></li>
+                            </ul>
+                        </div>
+                        @RenderSection("SectionName", required: false)
+                        @RenderBody()
+                    </div>
+                </div>
+            </div>
+            <div id="bottom">
+                <div id="foot">
+                &#169; @theYear - All Rights Reserved
+                </div>
+            </div>
+
+        </div>
+
+        
+
+        <!-- JS Global Compulsory -->
+        <script type="text/javascript"
+                src="../scripts/jquery-1.9.1.min.js"></script>
+        <script type="text/javascript"
+                src="../scripts/modernizr.custom.js"></script>
+        <script type="text/javascript"
+                src="../scripts/bootstrap.min.js"></script>
+
+        @RenderSection("Scripts", required: false)
+        <!-- FULL SITE SCRIPTS -->
+        <script src="../scripts/bootstrap.js"></script>
+        <script type="text/javascript"
+                src="../scripts/back-to-top.js"></script>
+          <script type="text/javascript">
+            jQuery(document).ready(function() {
+                App.init();
+            });
+        </script>
+
+    </body>
+</html>

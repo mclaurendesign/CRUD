@@ -1,0 +1,38 @@
+﻿@{
+     Page.Title ="Home";
+     var data = dataAccess.GetProjects();
+     var grid = new WebGrid(data);
+}
+@section CSS {
+<!--OPTIONAL SECTION, PAGE SPECIFIC CSS-->
+}
+@section SectionName {
+    <section class="">
+<!--OPTIONAL SECTION-->
+    </section>
+}
+
+
+    <!--PAGE CONTENT-->
+    <div class="page-header">
+        <h1>@Page.Title</h1>
+    </div>
+
+	
+   <!-- @grid.GetHtml()-->
+    <ul>
+        @foreach(var project in data)
+        {
+           <li>
+            <a href="edit.cshtml/@project.projectID">Edit: @project.Client -- @project.projectType</a>
+                                            </li>
+        }
+    </ul>
+
+
+
+
+
+@section Scripts {
+        <!--OPTIONAL SECTION, PAGE SPECIFIC JAVASCRIPT-->
+}

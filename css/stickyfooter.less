@@ -1,0 +1,46 @@
+@footerHeight: 80px;
+@padding: 10px;
+@darkGray: #666;
+
+html, body {
+    margin: 0;
+    padding-top: @padding/2;
+    height: 100%;
+    font-family: Arial;
+    background-color: #000;
+}
+
+#container {
+    min-height: 100%;
+    position: relative;
+    background-color: #fff;
+    
+}
+
+#wrap, #foot, #heading
+{
+    margin: 0 auto;
+}
+#top {
+    background: #ff0;
+    padding: @padding;
+}
+
+#body {
+    padding: @padding;
+    padding-bottom: @footerHeight + 20px;  /*80px;  Height of the footer + 20px */
+}
+
+#bottom {
+    padding: @padding;
+    color: #fff;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: @footerHeight;  /* 60px; /* Height of the footer */
+    background: @darkGray;
+}
+hr
+{
+    width: 90%;
+}
