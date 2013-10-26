@@ -2,10 +2,9 @@
 
 @{
       Page.Title ="Detail";
-        var id=int.Parse(Request["projectID"]);
-
-    var project = dataAccess.GetProjectById(id);
-    var dataImages = dataAccess.GetImagesById(id);
+      var id=int.Parse(Request["projectID"]);
+      var project = dataAccess.GetProjectById(id);
+       var dataImages = dataAccess.GetImagesById(id);
 
       // Response.Redirect("~/Index.cshtml");
 }
