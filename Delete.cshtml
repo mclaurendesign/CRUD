@@ -1,15 +1,24 @@
-﻿@using System.Dynamic;
+﻿
+@using System.Dynamic;
 
-@{/*
+@{
+    /*
     COMMENTS
 
 
 
 
     */
-      Page.Title ="Edit";
-       var id=int.Parse(UrlData[0]);
+
+      Page.Title ="Delete";
+      var id=int.Parse(UrlData[0]);
        var emp = dataAccess.GetEmployeeById(id);
+       if (IsPost)
+       {
+           
+    dataAccess.DeleteEmployee(id);
+       }
+
 }
 
 
@@ -24,28 +33,13 @@
 }
 <h2>@Page.Title</h2>
 
-<div>
-    <!--PAGE CONTENT-->
-    @{ 
-     if (IsPost)
-        {
-    dynamic item = new ExpandoObject();
-    item.Company = Request["Company"];
-    item.LastName = Request["LastName"];
-    item.FirstName = Request["FirstName"];
-    item.Email = Request["Email"];
-    item.JobTitle = Request["JobTitle"];
-    item.Mobile = Request["Mobile"];
-    item.Web = Request["Web"];
-    item.Notes = Request["Notes"];
-    item.ID = int.Parse(UrlData[0]);
-    
-    dataAccess.UpdateEmployee(item);
-     Response.Redirect("~/Index.cshtml");
-        }
-        else {
+<div class="row">
+    <div class="span9">
+        <!--PAGE CONTENT-->
+
+        
             <fieldset>
-                <legend>Edit</legend>
+                <legend>Delete</legend>
 
                 <form method="post"
                       action="">
@@ -110,14 +104,17 @@
                     <br />
 
                     <br />
-                    <br /> <br />
                     <input type="submit"
-                           value="Submit">
+                           value="Delete">
                 </form>
             </fieldset>
-        }
-    }
+      
 
+    </div>
+    <div class="span3">
+
+       
+    </div>
 </div>
 @section Scripts {
     <!--OPTIONAL SECTION, PAGE SPECIFIC JAVASCRIPT-->

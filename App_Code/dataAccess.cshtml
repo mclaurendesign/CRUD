@@ -2,65 +2,51 @@
 
 @functions {
 
-//public static readonly string db = "mcladmin";
-
     public static Database db {
         get {
-            return Database.Open("mcladmin");
+            return Database.Open("Employees");
         }
     }
-
    
-    public static IEnumerable<dynamic> GetProjects() {
-     // SELECT ALL PROJECTS    
-        var sql = "SELECT * FROM testProjects";
+    public static IEnumerable<dynamic> GetEmployees() {
+     // SELECT ALL     
+        var sql = "SELECT * FROM employee";
         return db.Query(sql);
     }
     
-    public static IEnumerable<dynamic> GetProjects(string sql) {
-        // SELECT PROJECTS
-       //var sql = "SELECT * FROM testProjects";
+    public static IEnumerable<dynamic> GetEmployees(string sql) {
+        // SELECT 
         return db.Query(sql);
     }
 
-     public static dynamic GetProjectById(int id)
+     public static dynamic GetEmployeeById(int id)
     {
-        //SELECT ALL PROJECTS BY PROJECT ID
-        var sql = "SELECT * FROM testProjects WHERE projectID = @0";
+        //SELECT BY ID
+        var sql = "SELECT * FROM employee WHERE ID = @0";
         return db.Query(sql, id).Single();
     }
     
-    public static void AddProject(dynamic project) {
-        // SAVE NEW PROJECT
-        var sql = "INSERT INTO testProjects  (projectName, client, description, projectType, tools,  publicView)   VALUES (@0, @1, @2, @3, @4, @5)";
-        Response.Write("Add project reached successfully!");
+    public static void AddEmployee(dynamic emp) {
+        // SAVE NEW EMPLOYEE
+        var sql = "INSERT INTO employee  (Company, LastName, FirstName, Email, JobTitle, Mobile, Web, Notes)   VALUES (@0, @1, @2, @3, @4, @5, @6, @7)";
         
-        db.Execute(sql, project.projectName, project.client, project.description, project.projectType, project.tools, project.publicView);
+        db.Execute(sql, emp.Company, emp.LastName, emp.FirstName, emp.Email, emp.JobTitle, emp.Mobile, emp.Web, emp.Notes);
     }
 
-     public static void UpdateProject(dynamic project) {
-        // UPDATE PROJECT
-        var sql = "UPDATE testProjects SET projectName=@0, client=@1, description=@2, projectType=@3, tools=@4, publicView=@5 WHERE (projectID=@6)";
+     public static void UpdateEmployee(dynamic emp) {
+        // UPDATE EMPLOYEE
+        var sql = "UPDATE employee SET Company=@0, LastName=@1, FirstName=@2, Email=@3, JobTitle=@4, Mobile=@5, Web=@6, Notes=@7 WHERE (ID=@8)";
         
-        db.Execute(sql, project.projectName, project.client, project.description, project.projectType, project.tools, project.publicView, project.projectID);
+        db.Execute(sql, emp.Company, emp.LastName, emp.FirstName, emp.Email, emp.JobTitle, emp.Mobile, emp.Web, emp.Notes, emp.ID);
     }
 
 
-    public static void DeleteProject(int id) {
-        // DELETE PROJECT
-        //DELETE * FROM [projectTable] WHERE ([projectID] = @projectID)
-        var sql = "DELETE * FROM testProjects WHERE projectID = @0";
-        db.Execute(sql, id);
+    public static void DeleteEmployee(int empID) {
+        // DELETE EMPLOYEE
+        var sql = "DELETE * FROM employee WHERE ID = @0";
+        //db.Execute(sql, empID);
     }
-    
-    //// PHOTOS SELECTION
-     public static dynamic GetImagesById(int id)
-    {
-        //SELECT ALL PROJECTS BY PROJECT ID
-        var sql = "SELECT * FROM testImages WHERE photoProjectID = @0";
-        return db.Query(sql, id).Single();
-    }
-   
+
        
 
     }

@@ -1,38 +1,75 @@
 ﻿@{
      Page.Title ="Home";
-     var data = dataAccess.GetProjects();
-     var grid = new WebGrid(data);
+     var data = dataAccess.GetEmployees();
+     //var columns = new []{"ID", "Company", "LastName", "FirstName", "Email", "JobTitle", "Mobile", "Web", "Notes"};
+    var grid = new WebGrid(data, ajaxUpdateContainerId: "grid", selectionFieldName:"ID" ,rowsPerPage: 20); //, columnNames: columns);
+
+
 }
 @section CSS {
-<!--OPTIONAL SECTION, PAGE SPECIFIC CSS-->
+    <!--OPTIONAL SECTION, PAGE SPECIFIC CSS-->
+
 }
 @section SectionName {
     <section class="">
-<!--OPTIONAL SECTION-->
+        <!--OPTIONAL SECTION-->
     </section>
 }
 
 
-    <!--PAGE CONTENT-->
-    <div class="page-header">
-        <h1>@Page.Title</h1>
-    </div>
-
-	
-   <!-- @grid.GetHtml()-->
-    <ul>
-        @foreach(var project in data)
-        {
-           <li>
-            <a href="edit.cshtml/@project.projectID">Edit: @project.Client -- @project.projectType</a>
-                                            </li>
-        }
-    </ul>
+<!--PAGE CONTENT-->
+<div class="page-header">
+    <h1>Employee Directory</h1>
+</div>
 
 
-
-
+<div id="grid">
+    @grid.GetHtml(
+        tableStyle : "table",
+        alternatingRowStyle : "alternate",
+        headerStyle : "header",
+        numericLinksCount: 10,
+        columns:grid.Columns(             
+            grid.Column(
+            header:"", 
+            format:@<a href="/Edit/@item.ID">Edit</a>),
+            grid.Column(
+            header:"", 
+            format:@<a href="/Detail/@item.ID">Detail</a>),
+            grid.Column(
+            header:"", 
+            format:@<a href="/Delete/@item.ID">Delete</a>),
+            grid.Column("Company", header:"Company"),
+            grid.Column("LastName", header:"Last"),
+            grid.Column("FirstName", header:"First"),
+            grid.Column("Email", header:"Email"),
+            grid.Column("JobTitle", header:"Job Title"),
+            grid.Column("Mobile", header:"Mobile"),
+            grid.Column("Web", header:"Web"),
+            grid.Column("Notes", header:"Notes")  
+            )
+        )
+</div>
 
 @section Scripts {
-        <!--OPTIONAL SECTION, PAGE SPECIFIC JAVASCRIPT-->
+    <!--OPTIONAL SECTION, PAGE SPECIFIC JAVASCRIPT-->
+    <script type="text/javascript">
+        $(function(){
+            $('tbody tr').live('hover', function(){
+                $(this).toggleClass('clickable');
+            }).live('click', function(){
+                location.href = '../details.cshtml/' + $(this).find('td:first').text();  
+            }); 
+        });
+    </script>
+<script type="text/javascript">
+    $(function () {
+        $('#excel').appendTo($('tfoot tr td')).on('hover', function () {
+            $(this).css('cursor', 'pointer');
+        });
+        $('#excel').on('click', function () {
+            $('<iframe src="/GenerateExcel"></iframe>').appendTo('body').hide();
+        });
+    });
+</script>
 }

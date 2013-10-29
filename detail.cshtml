@@ -11,11 +11,9 @@
     */
 
       Page.Title ="Detail";
-      var id=int.Parse(Request["projectID"]);
-      var project = dataAccess.GetProjectById(id);
-      var dataImages = dataAccess.GetImagesById(id);
+      var id=int.Parse(UrlData[0]);
+      var emp = dataAccess.GetEmployeeById(id);
 
-      // Response.Redirect("~/Index.cshtml");
 }
 
 
@@ -30,58 +28,78 @@
 }
 <h2>@Page.Title</h2>
 
-<div>
-    <!--PAGE CONTENT-->
-    <fieldset>
-        <legend>Input</legend>
+<div class="row">
+    <div class="span9">
+        <!--PAGE CONTENT-->
+        <fieldset>
+            <legend>@emp.LastName, @emp.FirstName</legend>
 
-        <label for="projectName"
-               class="span2">Project Name: </label>
-        <input type="text"
-               class="span4"
-               name="projectName"
-               value="@project.projectName" />
-        <br />
-        <label for="client"
-               class="span2">Client: </label>
-        <input type="text"
-               name="client"
-               value="@project.client" />
-        <br />
-        <label for="description"
-               class="span2">Description: </label>
-        <textarea cols="40"
-                  rows="4"
-                  name="description">@project.description</textarea>
-        <br />
-        <label for="projectType"
-               class="span2">Project Type: </label>
-        <input type="text"
-               name="projectType"
-               value="@project.projectType" />
-        <br />
-        <label for="tools"
-               class="span2">Tools: </label>
-        <input type="text"
-               name="tools"
-               value="@project.tools" />
-        <br />
-        <label for="publicView"
-               class="span2">Public: </label>
-        <input type="checkbox"
-               checked="@project.publicView" />
-        <br /> <br />
-        <input type="submit"
-               value="Submit">
-    </fieldset>
+            <label for="Company"
+                   class="span2">Company: </label>
+            <input type="text"
+                   class="span3"
+                   name="Company"
+                   value="@emp.Company" />
+            <br />
+            <label for="LastName"
+                   class="span2">Last Name: </label>
+            <input type="text"
+                   name="LastName"
+                           class="span3"
+                   value="@emp.LastName" />
+            <br />
+            <label for="FirstName"
+                   class="span2">First Name: </label>
+            <input type="text"
+                   name="FirstName"
+                           class="span3"
+                   value="@emp.FirstName" />
+            <br />
+            <label for="Email"
+                   class="span2">Email: </label>
+            <input type="text"
+                   name="Email"
+                           class="span3"
+                   value="@emp.Email" />
+            <br />
+            <label for="JobTitle"
+                   class="span2">Job Title: </label>
+            <input type="text"
+                   name="JobTitle"
+                           class="span3"
+                   value="@emp.JobTitle" />
+            <br />
+            <label for="Mobile"
+                   class="span2">Mobile: </label>
+            <input type="text"
+                   name="Mobile"
+                           class="span3"
+                   value="@emp.Mobile" />
+            <br />
+            <label for="Web"
+                   class="span2">Web: </label>
+            <input type="text"
+                   name="Web"
+                           class="span3"
+                   value="@emp.Web" />
+            <br />
+            <label for="Notes"
+                   class="span2">Notes: </label>
+            <textarea cols="40"
+                      rows="4"
+                           class="span3"
 
-</div>
-<div>
+                      name="Notes">@emp.Notes</textarea>
+            <br />
+           
+            <br />
+        </fieldset>
 
-    <img src="images/@dataImages.photoName"
-         alt="@project.client">
+    </div>
+    <div class="span3">
+        <!-- IMAGE DISPLAY -->
+    </div>
 </div>
 @section Scripts {
-        <!--OPTIONAL SECTION, PAGE SPECIFIC JAVASCRIPT-->
-  
+    <!--OPTIONAL SECTION, PAGE SPECIFIC JAVASCRIPT-->
 }

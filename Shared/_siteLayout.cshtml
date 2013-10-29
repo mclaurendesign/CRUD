@@ -26,9 +26,7 @@
     <body class="top">
         <div id="container">
             <div id="wrap">
-                <div id="body">
                     <div class="container">
-                        <div id="top">
                             <ul class="nav nav-tabs ">
                                 <li>
                                     <a href="../index.cshtml">Index
@@ -37,23 +35,15 @@
                                     <a href="../Add.cshtml">Add
                                         <span class="divider"></span></a></li>
                                 <li>
-                                    <a href="../Detail.cshtml">Detail
-                                        <span class="divider"></span></a></li>
-                                <li>
-                                    <a href="../Edit.cshtml">Edit
-                                        <span class="divider"></span></a></li>
-                                <li>
                                     <a href="../Delete.cshtml">Delete
                                         <span class="divider"></span></a></li>
                             </ul>
-                        </div>
                         @RenderSection("SectionName", required: false)
                         @RenderBody()
                     </div>
                 </div>
-            </div>
             <div id="bottom">
-                <div id="foot">
+                <div class="container">
                 &#169; @theYear - All Rights Reserved
                 </div>
             </div>

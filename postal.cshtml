@@ -1,0 +1,68 @@
+﻿@{   
+    // On each request, use WebCache.Get to check whether the cache item exists.
+    if(WebCache.Get("postalCodes") == null) {
+        // Call the helper method to create the cache item if needed.
+        @AddPostalCodesToToCache();
+    }
+
+    // If the request is a postback, the user submitted a cache update.
+    // Users choose to reset the default list, or add a custom postal code.
+    if(IsPost) {
+        // If user chose reset, then remove and recreate the cache item.
+         if(Request["UpdateType"] == "reset") {
+            WebCache.Remove("postalCodes");
+            // Call the helper to recreate the cache with default postal codes.
+            @AddPostalCodesToToCache();
+        }
+        else {
+            // If user chose add, then add a custom value to update the cache. 
+            // First retrieve the existing values. Use a generic 
+            // List to make it easy to add a new value to the list.
+            List<string> customPostalData = new List<string>(WebCache.Get("postalCodes"));
+            // Add the value submitted by a user. 
+            customPostalData.Add(Request["NewCode"]);
+            // Call the method to update the cache, and pass a list with the new postal code.
+            @AddPostalCodesToToCache(customPostalData);
+        }       
+    } 
+
+}
+
+@helper AddPostalCodesToToCache(object postalCodeData = null) {
+    // If the postalCodeData param is null, no custom postal code 
+    // values were submitted, so use the default postal code list.
+    if(postalCodeData == null) {
+        // Create cache data from an array. Data for the 
+        // cache can also come from a database or other sources.
+        string[] postalCodeArray = {"123456", "234567", "345678"};
+        postalCodeData = postalCodeArray;
+    }
+    // Create the postal codes cache item.
+    WebCache.Set("postalCodes", postalCodeData, 1000, false);
+}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>WebCache Helper</title>
+    </head>
+    <body>
+        <form method="post" action="">
+            <input type="radio" name="UpdateType" value="reset" />Reset the original postal codes list<br />
+            <input type="radio" name="UpdateType" value="add" checked />Add a custom postal code <br />
+            <div style="margin-left: 35px">
+              <label for="NewCode">New Code: </label>
+              <input name="NewCode" type="text" value="" />
+            </div>
+            <p></p>
+            <input name="UpdateCache" type="Submit" value="Update Postal Codes" />
+	</form>
+        <h2>Postal Code Listing</h2>
+        <div>
+            <!-- Loop through and display the postal codes from the cache. -->
+            @foreach (string p in WebCache.Get("postalCodes")) {
+                <p>@p</p>
+	    }
+        </div>
+    </body>
+</html>

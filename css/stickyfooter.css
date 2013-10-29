@@ -11,7 +11,7 @@ body {
   position: relative;
   background-color: #fff;
 }
-#wrap,
+.wrap,
 #foot,
 #heading {
   margin: 0 auto;
@@ -39,4 +39,23 @@ body {
 }
 hr {
   width: 90%;
+}
+.table {
+  background: #fff;
+  border-collapse: collapse;
+  text-align: left;
+}
+.table th {
+  font-size: 14px;
+  font-weight: normal;
+  color: #039;
+  padding: 10px 8px;
+  border-bottom: 2px solid #6678b1;
+}
+.table td {
+  border-bottom: 1px solid #ccc;
+  padding: 6px 8px;
+}
+.alternate {
+  background: #e6f4ff;
 }
