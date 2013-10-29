@@ -1,2 +1,7 @@
 
 /hold
+/postal.cshtml
+/Caching.cshtml
+/App_Code/BLL
+/App_Code/DAL
+/App_Code/LongTextField.cs
